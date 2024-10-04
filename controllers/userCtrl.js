@@ -44,19 +44,19 @@ const userCtrl = {
   refreshtoken: async(req,res) => {
 
       try{
-          const rf_token = req.cookies.refreshtoken;
+          const rf_token = req.cookies.refreshtoken ||  req.body.token ;
           console.log(rf_token)
-          if(!rf_token) return res.status(400).json({msg:"Please Login or Register"});
+          if(!rf_token) return res.status(401).json({msg:"No refresh Token provided"});
   
           jwt.verify(rf_token,process.env.REFRESH_TOKEN_SECRET,(err,user) => {
-              if(err) return res.status(400).json({msg:"Please Login or Register"})
+              if(err) return res.status(403).json({msg:"Invalid refresh token"})
               const accesstoken = createAccessToken({id:user.id})
           res.json({user,accesstoken})
           })
   
       }
       catch(err){
-return res.status(500).json({msg:err.message})
+          return res.status(500).json({msg:err.message})
       }
      
 
