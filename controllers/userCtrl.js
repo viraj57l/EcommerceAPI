@@ -32,7 +32,7 @@ const userCtrl = {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production', 
             path: '/user/refresh_token',
-            sameSite: 'none' //
+            
           })
           res.json({accesstoken})
 
@@ -80,7 +80,7 @@ return res.status(500).json({msg:err.message})
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production', 
         path: '/user/refresh_token',
-        sameSite: 'none'
+       
       });
 
       res.json({accesstoken})
@@ -109,7 +109,7 @@ return res.status(500).json({msg:err.message})
       return res.status(500).json({ msg: err.message });  
     }
   }
-}
+} 
 
 const createAccessToken = (payload) => {
   return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1d' });
