@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const app =express();
 
-const allowedOrigins = ['https://ecommerce-react-app-chi.vercel.app','https://ecommerce-7ljj7ckpc-viraj57ls-projects.vercel.app'];
+const allowedOrigins = ['https://ecommerce-react-app-chi.vercel.app','ecommerce-react-ip2cmmbqz-viraj57ls-projects.vercel.app'];
 
 //middleware parser
 app.use(express.json());
