@@ -29,8 +29,10 @@ const userCtrl = {
           const refreshtoken = createRefreshToken({id:newUser._id})
 
           res.cookie('refreshtoken', refreshtoken,{
-              httpOnly:true,
-              path:'/user/refresh_token'
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', 
+            path: '/user/refresh_token',
+            sameSite: 'none' //
           })
           res.json({accesstoken})
 
@@ -75,9 +77,11 @@ return res.status(500).json({msg:err.message})
       const refreshtoken =createRefreshToken({id:user._id})
     
       res.cookie('refreshtoken',refreshtoken,{
-        httpOnly:true,
-        path:'/user/refresh_token'
-      })
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', 
+        path: '/user/refresh_token',
+        sameSite: 'none'
+      });
 
       res.json({accesstoken})
     }
@@ -91,7 +95,7 @@ return res.status(500).json({msg:err.message})
       return res.json({msg:"Log out"})
     }
     catch(err){
-      
+      return res.status(500).json({ msg: err.message });  
     }
   },
 
@@ -102,7 +106,7 @@ return res.status(500).json({msg:err.message})
       if(!user) return res.status(400).json({msg:"User not Found"})
       res.json(user)
     }catch(err){
-
+      return res.status(500).json({ msg: err.message });  
     }
   }
 }
