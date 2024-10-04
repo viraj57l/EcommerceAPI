@@ -3,12 +3,18 @@ const mongoose =require('mongoose');
 require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/useRoutes')
+const cors = require('cors');
 
 const app =express();
 
 //middleware parser
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: 'https://ecommerce-react-app-chi.vercel.app',
+    methods: 'GET,POST,PUT,DELETE',
+    credentials: true
+}));
 
 const PORT =process.env.PORT || 5000;
 
