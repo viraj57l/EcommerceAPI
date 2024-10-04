@@ -7,11 +7,20 @@ const cors = require('cors');
 
 const app =express();
 
+const allowedOrigins = ['https://ecommerce-react-app-chi.vercel.app', 'https://ecommerce-react-8jyvgqzn4-viraj57ls-projects.vercel.app'];
+
 //middleware parser
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(cors({
-    origin: 'https://ecommerce-react-app-chi.vercel.app',
+    origin: function (origin, callback) {
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     methods: 'GET,POST,PUT,DELETE',
     credentials: true
 }));
