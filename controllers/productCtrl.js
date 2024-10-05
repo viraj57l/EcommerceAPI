@@ -88,7 +88,7 @@ const productCtrl={
             const {title,price,description,content,images,category}=req.body 
             if(!images) return res.status(500).json({msg:"No image uploaded"})
            
-            await Products.findByIdAndUpdate({
+            await Products.findByIdAndUpdate(req.params.id,{
                 title:title.toLowerCase(),price,description,content,images,category
             })
 
