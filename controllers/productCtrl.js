@@ -32,7 +32,7 @@ class APIfeatures{
             this.query=this.query.sort('-createdAt')
         }
         return this
-    }
+    } 
 
     pagination(){
         const page=this.queryString.page * 1 || 1;
@@ -88,7 +88,7 @@ const productCtrl={
             const {title,price,description,content,images,category}=req.body 
             if(!images) return res.status(500).json({msg:"No image uploaded"})
            
-            await Products.findOneAndUpdate({
+            await Products.findByIdAndUpdate({
                 title:title.toLowerCase(),price,description,content,images,category
             })
 
