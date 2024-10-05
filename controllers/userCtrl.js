@@ -30,9 +30,9 @@ const userCtrl = {
 
           res.cookie('refreshtoken', refreshtoken,{
             httpOnly: true,
-            secure: false, 
+            secure: process.env.NODE_ENV === 'production', 
             path: '/user/refresh_token',
-            
+            sameSite: 'None'            
           })
           res.json({accesstoken})
 
@@ -78,9 +78,9 @@ const userCtrl = {
     
       res.cookie('refreshtoken',refreshtoken,{
         httpOnly: true,
-        secure: false, 
+        secure: process.env.NODE_ENV === 'production', 
         path: '/user/refresh_token',
-       
+        sameSite: 'None'
       });
 
       res.json({accesstoken})

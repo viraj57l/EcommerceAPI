@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(cors({
     origin: '*',
     methods: 'GET,POST,PUT,DELETE',
-    credentials: true, // If you're using cookies or authorization headers, this can be removed if not needed
+    credentials: true,
 }));
 
 
